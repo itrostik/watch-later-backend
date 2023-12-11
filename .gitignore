@@ -37,3 +37,9 @@ lerna-debug.log*
 test
 yarn.lock
 tsconfig.build.json
+
+.env
+
+/prisma
+
+uploads
