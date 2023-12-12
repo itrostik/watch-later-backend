@@ -2,14 +2,16 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
   Param,
   ParseIntPipe,
   Post,
+  Put,
   UsePipes,
   ValidationPipe
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserDto } from './user.dto';
+import { UserDto } from '../dto/user.dto';
 
 @Controller()
 export class UserController {
@@ -25,15 +27,8 @@ export class UserController {
     return this.userService.getAll();
   }
 
-  @Post('/users')
-  @UsePipes(new ValidationPipe())
-  async create(@Body() dto: UserDto) {
-    return this.userService.create(dto);
-  }
-
-  @Post('/users/check')
-  @UsePipes(new ValidationPipe())
-  async check(@Body() dto: UserDto) {
-    return this.userService.check(dto);
+  @Put('/users')
+  async updateUser(@Body() dto: UserDto) {
+    return this.userService.update(dto);
   }
 }

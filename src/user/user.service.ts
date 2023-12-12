@@ -1,8 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { UserDto } from './user.dto';
-
-import * as bcrypt from 'bcrypt';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -22,30 +20,12 @@ export class UserService {
     return user;
   }
 
-  async create(dto: UserDto) {
-    const saltOrRounds = 10;
-    const passwordHash = await bcrypt.hash(dto.password, saltOrRounds);
-
-    const { password, ...user } = dto;
-    return this.prisma.user.create({
-      data: {
-        ...user,
-        passwordHash
-      }
-    });
-  }
-
-  async check(dto: UserDto) {
-    const user = await this.prisma.user.findUnique({
+  async update(dto: UserDto) {
+    this.prisma.user.update({
       where: {
         email: dto.email
-      }
+      },
+      data: JSON.stringify(dto)
     });
-    if (!user) throw new NotFoundException('Неверный логин или пароль');
-    const isValidatePassword = await bcrypt.compare(
-      dto.password,
-      user.passwordHash
-    );
-    return true;
   }
 }
