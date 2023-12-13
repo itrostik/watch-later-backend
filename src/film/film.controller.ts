@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   Post,
   Put,
@@ -13,6 +14,12 @@ import { FilmDto } from '../dto/film.dto';
 @Controller('film')
 export class FilmController {
   constructor(private readonly filmService: FilmService) {}
+
+  @Get('/')
+  @HttpCode(200)
+  async getAll() {
+    return this.filmService.getAll();
+  }
 
   @Post('/add')
   @HttpCode(201)

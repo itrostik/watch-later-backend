@@ -6,6 +6,9 @@ import { FilmDto } from '../dto/film.dto';
 export class FilmService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async getAll() {
+    return this.prisma.film.findMany();
+  }
   async add(dto: FilmDto) {
     return this.prisma.film.create({
       data: dto

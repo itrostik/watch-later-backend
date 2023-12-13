@@ -21,11 +21,18 @@ export class UserService {
   }
 
   async update(dto: UserDto) {
-    this.prisma.user.update({
+    console.log('updated...');
+    console.log(dto);
+    return this.prisma.user.update({
       where: {
         email: dto.email
       },
-      data: JSON.stringify(dto)
+      data: {
+        name: dto.name,
+        description: dto.description,
+        avatarUrl: dto.avatarUrl,
+        genres: JSON.parse(JSON.stringify(dto.genres))
+      }
     });
   }
 }
