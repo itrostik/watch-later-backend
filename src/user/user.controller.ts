@@ -5,6 +5,7 @@ import {
   HttpCode,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Put,
   UsePipes,
@@ -12,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from '../dto/user.dto';
+import { FilmDto } from '../dto/film.dto';
 
 @Controller()
 export class UserController {
@@ -30,5 +32,10 @@ export class UserController {
   @Put('/users')
   async updateUser(@Body() dto: UserDto) {
     return this.userService.update(dto);
+  }
+
+  @Patch('/users')
+  async updateUserFilms(@Body() info: FilmDto & Pick<UserDto, 'email'>) {
+    return this.userService.updateFilms(info);
   }
 }

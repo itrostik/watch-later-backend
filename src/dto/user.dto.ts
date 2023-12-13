@@ -26,7 +26,8 @@ export class UserDto {
 
   @IsArray()
   films?: {
-    name: Pick<FilmDto, 'name'>;
-    review: number;
+    info: FilmDto;
+    review: number | null;
+    watched: boolean;
   }[];
 }

@@ -13,6 +13,9 @@ export class FilmDto {
   @IsString()
   posterUrl: string;
 
+  @IsString()
+  year: string;
+
   @IsArray()
   genres: string[];
 

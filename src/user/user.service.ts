@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UserDto } from '../dto/user.dto';
+import { FilmDto } from '../dto/film.dto';
 
 @Injectable()
 export class UserService {
@@ -32,6 +33,26 @@ export class UserService {
         description: dto.description,
         avatarUrl: dto.avatarUrl,
         genres: JSON.parse(JSON.stringify(dto.genres))
+      }
+    });
+  }
+
+  async updateFilms(info: FilmDto & Pick<UserDto, 'email'>) {
+    const { email, ...film } = info;
+    console.log(email, film);
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    });
+    const userFilms = JSON.parse(JSON.stringify(user.films));
+    userFilms.push(film);
+    return this.prisma.user.update({
+      where: {
+        email: email
+      },
+      data: {
+        films: JSON.parse(JSON.stringify(userFilms))
       }
     });
   }

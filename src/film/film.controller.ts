@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  Param,
   Post,
   Put,
   UsePipes,
@@ -15,10 +16,17 @@ import { FilmDto } from '../dto/film.dto';
 export class FilmController {
   constructor(private readonly filmService: FilmService) {}
 
-  @Get('/')
+  @Get('/getAll')
   @HttpCode(200)
   async getAll() {
     return this.filmService.getAll();
+  }
+
+  @Post('/get')
+  @HttpCode(200)
+  async getByName(@Body() name: { name: string }) {
+    console.log(name);
+    return this.filmService.getByName(name.name);
   }
 
   @Post('/add')
