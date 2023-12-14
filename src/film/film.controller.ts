@@ -22,7 +22,7 @@ export class FilmController {
     return this.filmService.getAll();
   }
 
-  @Get('/getById')
+  @Post('/getById')
   @HttpCode(200)
   async getById(@Body('id') id: number) {
     return this.filmService.getById(id);
