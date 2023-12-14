@@ -35,7 +35,14 @@ export class UserController {
   }
 
   @Patch('/users')
-  async updateUserFilms(@Body() info: FilmDto & Pick<UserDto, 'email'>) {
-    return this.userService.updateFilms(info);
+  async addUserFilms(@Body() info: FilmDto & Pick<UserDto, 'email'>) {
+    return this.userService.addUserFilms(info);
+  }
+
+  @Patch('/users/film')
+  async updateUserFilm(
+    @Body() info: Pick<UserDto, 'films'> & Pick<UserDto, 'email'>
+  ) {
+    return this.userService.updateUserFilm(info);
   }
 }

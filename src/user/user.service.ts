@@ -32,7 +32,7 @@ export class UserService {
     });
   }
 
-  async updateFilms(info: FilmDto & Pick<UserDto, 'email'>) {
+  async addUserFilms(info: FilmDto & Pick<UserDto, 'email'>) {
     const { email, ...film } = info;
     console.log(email, film);
     const user = await prisma.user.findUnique({
@@ -50,5 +50,16 @@ export class UserService {
         films: JSON.parse(JSON.stringify(userFilms))
       }
     });
+  }
+
+  async updateUserFilm(info: Pick<UserDto, 'films'> & Pick<UserDto, 'email'>) {
+    const { email, ...film } = info;
+    console.log(email, film);
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    });
+    const userFilms = JSON.parse(JSON.stringify(user.films));
   }
 }
