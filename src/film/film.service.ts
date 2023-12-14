@@ -24,7 +24,7 @@ export class FilmService {
   }
 
   async getById(id: number) {
-    return prisma.film.findUnique({
+    return prisma.film.findFirst({
       where: {
         id
       }

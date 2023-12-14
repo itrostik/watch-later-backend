@@ -24,7 +24,7 @@ export class FilmController {
 
   @Get('/getById')
   @HttpCode(200)
-  async getById(@Body() id: number) {
+  async getById(@Body('id') id: number) {
     return this.filmService.getById(id);
   }
 
