@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
 import { FilmDto } from '../dto/film.dto';
+import prisma from '../main';
 
 @Injectable()
 export class FilmService {
-  constructor(private readonly prisma: PrismaService) {}
-
   async getAll() {
-    return this.prisma.film.findMany();
+    return prisma.film.findMany();
   }
 
   async getByName(name: string) {
@@ -26,13 +24,13 @@ export class FilmService {
   }
 
   async add(dto: FilmDto) {
-    return this.prisma.film.create({
+    return prisma.film.create({
       data: dto
     });
   }
 
   async update(dto: FilmDto) {
-    return this.prisma.film.update({
+    return prisma.film.update({
       where: {
         name: dto.name
       },
