@@ -23,7 +23,7 @@ export class FilmService {
     return [];
   }
 
-  async getById(id: string }) {
+  async getById(id: string) {
     return prisma.film.findUnique({
       where: {
         id: +id
