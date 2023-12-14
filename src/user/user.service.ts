@@ -39,7 +39,7 @@ export class UserService {
         email: email
       }
     });
-    const userFilms = JSON.parse(JSON.stringify(user.films));
+    const userFilms = JSON.parse(JSON.stringify(user.films['films']));
     console.log(userFilms);
     userFilms.push(film);
     return prisma.user.update({
