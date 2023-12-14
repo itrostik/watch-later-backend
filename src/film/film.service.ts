@@ -23,6 +23,14 @@ export class FilmService {
     return [];
   }
 
+  async getById(id: string) {
+    return prisma.film.findUnique({
+      where: {
+        id: +id
+      }
+    });
+  }
+
   async add(dto: FilmDto) {
     return prisma.film.create({
       data: dto
