@@ -53,7 +53,8 @@ export class UserService {
   }
 
   async updateUserFilm(info: Pick<UserDto, 'films'> & Pick<UserDto, 'email'>) {
-    const { email, ...films } = info;
+    const email = info.email;
+    const films = info.films;
     return prisma.user.update({
       where: {
         email: email
