@@ -40,6 +40,4 @@ tsconfig.build.json
 
 .env
 
-/prisma
-
 uploads
