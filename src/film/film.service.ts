@@ -12,13 +12,11 @@ export class FilmService {
     name = name.toLowerCase().trim();
     if (name.length > 0) {
       const films = await this.getAll();
-      const filteredFilms = films.filter((film) => {
+      return films.filter((film) => {
         if (film.name.toLowerCase().includes(name)) {
           return film;
         }
       });
-      console.log(filteredFilms);
-      return filteredFilms;
     }
     return [];
   }

@@ -40,7 +40,6 @@ export class UserService {
       }
     });
     const userFilms = JSON.parse(JSON.stringify(user.films));
-    console.log(userFilms);
     userFilms.push(film);
     return prisma.user.update({
       where: {
