@@ -39,5 +39,3 @@ yarn.lock
 tsconfig.build.json
 
 .env
-
-uploads

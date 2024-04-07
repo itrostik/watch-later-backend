@@ -3,7 +3,6 @@ import {
   Controller,
   Get,
   HttpCode,
-  Param,
   Post,
   Put,
   UsePipes,
@@ -31,7 +30,6 @@ export class FilmController {
   @Post('/get')
   @HttpCode(200)
   async getByName(@Body() name: { name: string }) {
-    console.log(name);
     return this.filmService.getByName(name.name);
   }
 
